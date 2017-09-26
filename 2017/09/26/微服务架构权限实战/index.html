@@ -69,16 +69,25 @@
 
 
 
-<meta name="description" content="架构技术上的实战技巧、老A生活上的随笔">
-<meta property="og:type" content="website">
-<meta property="og:title" content="老A的博客">
-<meta property="og:url" content="http://laoa.github.io/index.html">
+<meta name="description" content="背景从传统的单体应用转型Spring Cloud的朋友都在问我，Spring Cloud下的微服务权限怎么管？怎么设计比较合理？从大层面讲叫服务权限，往小处拆分，分别为三块：用户认证、用户权限、服务校验。 用户认证传统的单体应用可能习惯了session的存在，而到了Spring cloud的微服务化后，session虽然可以采取分布式会话来解决，但终究不是上上策。开始有人推行Spring Clou">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务架构权限实战">
+<meta property="og:url" content="http://laoa.github.io/2017/09/26/微服务架构权限实战/index.html">
 <meta property="og:site_name" content="老A的博客">
-<meta property="og:description" content="架构技术上的实战技巧、老A生活上的随笔">
+<meta property="og:description" content="背景从传统的单体应用转型Spring Cloud的朋友都在问我，Spring Cloud下的微服务权限怎么管？怎么设计比较合理？从大层面讲叫服务权限，往小处拆分，分别为三块：用户认证、用户权限、服务校验。 用户认证传统的单体应用可能习惯了session的存在，而到了Spring cloud的微服务化后，session虽然可以采取分布式会话来解决，但终究不是上上策。开始有人推行Spring Clou">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ofsc32t59.bkt.clouddn.com/17-09-06/1504710599902.jpg">
+<meta property="og:image" content="http://ofsc32t59.bkt.clouddn.com/17-09-06/1504710683413.jpg">
+<meta property="og:image" content="http://ofsc32t59.bkt.clouddn.com/17-08-29/1503966669324.jpg">
+<meta property="og:image" content="http://ofsc32t59.bkt.clouddn.com/17-09-07/1504776221054.jpg">
+<meta property="og:image" content="http://ofsc32t59.bkt.clouddn.com/17-09-09/1504942773136.jpg">
+<meta property="og:image" content="http://ofsc32t59.bkt.clouddn.com/17-09-07/1504776263697.jpg">
+<meta property="og:image" content="http://ofsc32t59.bkt.clouddn.com/17-09-11/1505098677576.jpg">
+<meta property="og:updated_time" content="2017-09-26T04:16:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="老A的博客">
-<meta name="twitter:description" content="架构技术上的实战技巧、老A生活上的随笔">
+<meta name="twitter:title" content="微服务架构权限实战">
+<meta name="twitter:description" content="背景从传统的单体应用转型Spring Cloud的朋友都在问我，Spring Cloud下的微服务权限怎么管？怎么设计比较合理？从大层面讲叫服务权限，往小处拆分，分别为三块：用户认证、用户权限、服务校验。 用户认证传统的单体应用可能习惯了session的存在，而到了Spring cloud的微服务化后，session虽然可以采取分布式会话来解决，但终究不是上上策。开始有人推行Spring Clou">
+<meta name="twitter:image" content="http://ofsc32t59.bkt.clouddn.com/17-09-06/1504710599902.jpg">
 
 
 
@@ -108,13 +117,13 @@
 
 
 
-  <link rel="canonical" href="http://laoa.github.io/"/>
+  <link rel="canonical" href="http://laoa.github.io/2017/09/26/微服务架构权限实战/"/>
 
 
 
 
 
-  <title>老A的博客</title>
+  <title>微服务架构权限实战 | 老A的博客</title>
   
 
 
@@ -133,8 +142,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -207,9 +215,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -239,9 +247,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/26/微服务架构权限实战/" itemprop="url">微服务架构权限实战</a></h1>
+          <h1 class="post-title" itemprop="name headline">微服务架构权限实战</h1>
         
 
         <div class="post-meta">
@@ -291,9 +297,7 @@
       
 
       
-        
-          
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>从传统的单体应用转型Spring Cloud的朋友都在问我，<code>Spring Cloud</code>下的微服务权限怎么管？怎么设计比较合理？从大层面讲叫服务权限，往小处拆分，分别为三块：<code>用户认证</code>、<code>用户权限</code>、<code>服务校验</code>。</p>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>从传统的单体应用转型Spring Cloud的朋友都在问我，<code>Spring Cloud</code>下的微服务权限怎么管？怎么设计比较合理？从大层面讲叫服务权限，往小处拆分，分别为三块：<code>用户认证</code>、<code>用户权限</code>、<code>服务校验</code>。</p>
 <h2 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h2><p>传统的单体应用可能习惯了session的存在，而到了Spring cloud的微服务化后，session虽然可以采取分布式会话来解决，但终究不是上上策。开始有人推行Spring Cloud Security结合很好的<code>OAuth2</code>，后面为了优化OAuth 2中<code>Access Token</code>的存储问题，提高后端服务的可用性和扩展性，有了更好Token验证方式<code>JWT</code>（JSON Web Token）。这里要强调一点的是，<code>OAuth2</code>和<code>JWT</code>这两个根本没有可比性，是两个完全不同的东西。<br><code>OAuth2是一种授权框架</code>，而<code>JWT</code>是一种认证协议 </p>
 <h4 id="OAuth2认证框架"><a href="#OAuth2认证框架" class="headerlink" title="OAuth2认证框架"></a>OAuth2认证框架</h4><h6 id="OAuth2中包含四个角色："><a href="#OAuth2中包含四个角色：" class="headerlink" title="OAuth2中包含四个角色："></a>OAuth2中包含四个角色：</h6><ul>
 <li>资源拥有者(Resource Owner) </li>
@@ -395,8 +399,6 @@
 <p>【基础+进阶】课程地址：<a href="http://edu.csdn.net/course/detail/5840" target="_blank" rel="external">http://edu.csdn.net/course/detail/5840</a></p>
 <h2 id="知识索取"><a href="#知识索取" class="headerlink" title="知识索取"></a>知识索取</h2><p>想获取更多微服务知识和文章，欢迎关注<code>老A</code>公众号，带你更懂微服务。<br><img src="http://ofsc32t59.bkt.clouddn.com/17-09-11/1505098677576.jpg" alt="img"></p>
 
-          
-        
       
     </div>
     
@@ -413,158 +415,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://laoa.github.io/2017/09/25/我们/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王浩彬（老A）">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/18695866">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老A的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/25/我们/" itemprop="url">我们</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-25T19:25:22+08:00">
-                2017-09-25
-              </time>
+              <a href="/2017/09/25/我们/" rel="next" title="我们">
+                <i class="fa fa-chevron-left"></i> 我们
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          以有生之年，行最长之旅。行于此生未尽，何其有幸，今生得以陌路相遇❤️
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/25/我们/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -574,10 +446,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -585,6 +458,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -605,8 +482,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -662,6 +548,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户认证"><span class="nav-number">2.</span> <span class="nav-text">用户认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#OAuth2认证框架"><span class="nav-number">2.0.1.</span> <span class="nav-text">OAuth2认证框架</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#OAuth2中包含四个角色："><span class="nav-number">2.0.1.0.1.</span> <span class="nav-text">OAuth2中包含四个角色：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#OAuth2包含4种授权模式"><span class="nav-number">2.0.1.0.2.</span> <span class="nav-text">OAuth2包含4种授权模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JWT认证协议"><span class="nav-number">2.0.2.</span> <span class="nav-text">JWT认证协议</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户权限"><span class="nav-number">3.</span> <span class="nav-text">用户权限</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#抽象与设计"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">抽象与设计</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#核心UML"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">核心UML</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#类说明"><span class="nav-number">3.0.0.2.1.</span> <span class="nav-text">类说明</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#模型与微服务的关系"><span class="nav-number">3.0.0.3.</span> <span class="nav-text">模型与微服务的关系</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务之间的鉴权"><span class="nav-number">4.</span> <span class="nav-text">服务之间的鉴权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化点"><span class="nav-number">5.</span> <span class="nav-text">优化点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐"><span class="nav-number">7.</span> <span class="nav-text">推荐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识索取"><span class="nav-number">8.</span> <span class="nav-text">知识索取</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
